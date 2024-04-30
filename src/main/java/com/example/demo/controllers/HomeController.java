@@ -11,6 +11,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    // Create some dummy data
     List<Step> steps1 = Arrays.asList(
         new Step("awb_accept", "3", "5"),
         new Step("build up", "2", "4"),

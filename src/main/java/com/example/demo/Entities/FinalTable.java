@@ -92,5 +92,78 @@ public class FinalTable {
 
     // Getters and Setters
     // Please implement the getters and setters here
+
+    public Integer getFltNum() {
+        return fltNum;
+    }
+    public void setFltNum(Integer fltNum) {
+        this.fltNum = fltNum;
+    }
+
+    public String getLegArr() {
+        return legArr;
+    }
+
+    public void setLegArr(String legArr) {
+        this.legArr = legArr;
+    }
+
+    public String getSchDepTime() {
+        return schDepTime;
+    }
+
+    public void setSchDepTime(String schDepTime) {
+        this.schDepTime = schDepTime;
+    }
+
+    public String getActDepTime() {
+        return actDepTime;
+    }
+
+    public void setActDepTime(String actDepTime) {
+        this.actDepTime = actDepTime;
+    }
+
+    public Float getProcessPercent() {
+        return processPercent;
+    }
+
+    public void setProcessPercent(Float processPercent) {
+        this.processPercent = processPercent;
+    }
+
+    public Float getAwbIntimeRate() {
+        return awbIntimeRate;
+    }
+
+    public void setAwbIntimeRate(Float awbIntimeRate) {
+        this.awbIntimeRate = awbIntimeRate;
+    }
+
+    public Float getUldIntime100Rate() {
+        return uldIntime100Rate;
+    }
+
+    public void setUldIntime100Rate(Float uldIntime100Rate) {
+        this.uldIntime100Rate = uldIntime100Rate;
+    }
+
+    public Float getHandoverIntime100Rate() {
+        return handoverIntime100Rate;
+    }
+
+    public void setHandoverIntime100Rate(Float handoverIntime100Rate) {
+        this.handoverIntime100Rate = handoverIntime100Rate;
+    }
+
+    public Float getLoadsheetIntimeRate() {
+        return loadsheetIntimeRate;
+    }
+
+    public void setLoadsheetIntimeRate(Float loadsheetIntimeRate) {
+        this.loadsheetIntimeRate = loadsheetIntimeRate;
+    }
+
+
 }
 

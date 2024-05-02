@@ -416,8 +416,8 @@
                     <td data-label="SCH_DEP_TIME" th:text="${flight.schDepTime}"></td>
                     <td data-label="Progress" class="is-progress-cell">
                       <div style="display: flex; align-items: center; vertical-align: middle;">
-                        <progress max="100" class="progress is-small is-primary" th:value="${flight.progress}" style="margin-right: 20px;"></progress>
-                        <span th:text="${flight.progress} + '%'"></span>
+                        <progress max="100" class="progress is-small is-primary" th:value="${flight.processPercent}*100" style="margin-right: 20px;"></progress>
+                        <span th:text="${flight.processPercent}*100 + '%'"></span>
                       </div>
                     </td>
                     <td data-label="ACT_DEP_TIME" th:text="${flight.actDepTime}"></td>
@@ -433,9 +433,21 @@
                   <tr th:id="'dropdown-table' + ${stat.index}" style="display: none;">
                     <td colspan="7">
                       <table>
-                        <tr th:each="step : ${flight.steps}">
-                          <td th:text="${step.name}"></td> <!-- 步骤的名称 -->
-                          <td th:text="${step.finishedNum} + '/' + ${step.totalNum}"></td> <!-- 步骤的完成情况 -->
+                        <tr>
+                          <td th:text="awbIntimeRate"></td> <!-- 步骤的名称 -->
+                          <td th:text="${flight.awbIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
+                        </tr>
+                        <tr>
+                          <td th:text="uldIntimeRate"></td> <!-- 步骤的名称 -->
+                          <td th:text="${flight.uldIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
+                        </tr>
+                        <tr>
+                          <td th:text="handoverIntimeRate"></td> <!-- 步骤的名称 -->
+                          <td th:text="${flight.handoverIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
+                        </tr>
+                        <tr>
+                          <td th:text="loadsheetIntimeRate"></td> <!-- 步骤的名称 -->
+                          <td th:text="${flight.loadsheetIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
                         </tr>
                       </table>
                     </td>

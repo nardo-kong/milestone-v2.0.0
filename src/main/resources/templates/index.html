@@ -15,11 +15,11 @@
 
   <style>
     #time-date-weather {
-      padding-left: 20px;
+      padding-left: 18px;
     }
   
     #time-date-weather p {
-      font-size: 16px;
+      font-size: 15px;
       color: white;
     }
   
@@ -217,7 +217,7 @@
           <p id="date"></p>
           <p id="weather"></p>
           <p>Hong Kong</p>
-          <p>Data from OpenWeatherMap</p>
+          <p>Data from <a href="https://openweathermap.org/" style="text-decoration: underline;"></a>OpenWeatherMap</a></p>
         </div>
       </div>
       
@@ -579,7 +579,7 @@
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-    document.getElementById('time').textContent = time;
+    document.getElementById('time').textContent = time + ' UTC+8';
     document.getElementById('date').textContent = date;
   }
   

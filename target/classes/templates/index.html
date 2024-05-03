@@ -194,11 +194,12 @@
         </li>
       </ul>
 
-      <!-- 侧栏时间-->
+      <!-- 侧栏时间天气-->
       <div class="menu is-menu-main">
         <p class="menu-label">Time and Weather</p>
         <div id="time-date-weather">
-          <p id="time-date"></p>
+          <p id="time"></p>
+          <p id="date"></p>
           <p id="weather"></p>
         </div>
       </div>
@@ -561,7 +562,8 @@
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-    document.getElementById('time-date').textContent = "Time: " + time + " Date: " + date;
+    document.getElementById('time').textContent = "Time: " + time;
+    document.getElementById('date').textContent = "Date: " + date;
   }
   
   // 更新天气
@@ -571,6 +573,8 @@
       .then(response => response.json())
       .then(data => {
         var weather = data.weather[0].description;
+        console.log("data: ", data);
+        console.log("weather: ", weather);
         document.getElementById('weather').textContent = "Weather: " + weather;
       });
   }

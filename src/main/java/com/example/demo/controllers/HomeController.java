@@ -53,7 +53,6 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         List<FinalTable> flights = finalTableRepository.findAll();
-        System.out.println("Number of flights: " + flights.size());
         modelAndView.addObject("flights", flights);
 
         return modelAndView;

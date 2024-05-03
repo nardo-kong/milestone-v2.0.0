@@ -138,6 +138,8 @@
       </div>
     </div>
     <div class="menu is-menu-main">
+
+      <!-- 侧栏General-->
       <p class="menu-label">General</p>
       <ul class="menu-list">
         <li>
@@ -147,8 +149,9 @@
           </a>
         </li>
       </ul>
-      <p class="menu-label">Examples</p>
 
+      <!-- 侧栏Examples-->
+      <p class="menu-label">Examples</p>
       <ul class="menu-list">
         <li>
           <a href="tables.html" class="has-icon">
@@ -190,6 +193,16 @@
           </ul>
         </li>
       </ul>
+
+      <!-- 侧栏时间-->
+      <div class="menu is-menu-main">
+        <p class="menu-label">Time and Weather</p>
+        <div id="time-date-weather">
+          <p id="time-date"></p>
+          <p id="weather"></p>
+        </div>
+      </div>
+      
 
     </div>
   </aside>
@@ -530,7 +543,6 @@
   for (var i = 0; i < flights; i++) {
     addEventListenerToIcon(i);
   }
-
   function addEventListenerToIcon(index) {
     var icon = document.getElementById('eye' + index);
     var dropdownRow = document.getElementById('dropdown-table' + index);
@@ -543,6 +555,34 @@
       }
     });
   }
+
+  // 更新时间
+  function updateTime() {
+    var now = new Date();
+    var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+    document.getElementById('time-date').textContent = "Time: " + time + " Date: " + date;
+  }
+  
+  // 更新天气
+  function updateWeather() {
+    // 获取天气信息
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=Hong%20Kong&appid=a44b91fec352869067b6cc26a0169d81')
+      .then(response => response.json())
+      .then(data => {
+        var weather = data.weather[0].description;
+        document.getElementById('weather').textContent = "Weather: " + weather;
+      });
+  }
+  
+  // 每秒更新一次时间
+  setInterval(updateTime, 1000);
+  
+  // 每5分钟更新一次天气
+  setInterval(updateWeather, 5 * 60 * 1000);
+  
+  // 页面加载时立即更新一次天气
+  updateWeather();
 </script>
 
 </body>

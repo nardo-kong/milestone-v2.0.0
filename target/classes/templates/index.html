@@ -579,8 +579,8 @@
     var now = new Date();
     var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-    document.getElementById('time').textContent = "Time: " + time;
-    document.getElementById('date').textContent = "Date: " + date;
+    document.getElementById('time').textContent = time;
+    document.getElementById('date').textContent = date;
   }
   
   // 更新天气
@@ -590,8 +590,7 @@
       .then(response => response.json())
       .then(data => {
         var weather = data.weather[0].description;
-        console.log(data);
-        console.log(weather);
+        weather = weather.charAt(0).toUpperCase() + weather.slice(1);
         document.getElementById('weather').textContent = weather;
       });
   }

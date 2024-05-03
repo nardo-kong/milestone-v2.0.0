@@ -217,7 +217,7 @@
           <p id="date"></p>
           <p id="weather"></p>
           <p>Hong Kong</p>
-          <p>Data from <a href="https://openweathermap.org/" style="text-decoration: underline;"></a>OpenWeatherMap</a></p>
+          <p>Data from <a href="https://openweathermap.org/" style="text-decoration: underline; color: inherit;">OpenWeatherMap</a></p>
         </div>
       </div>
       
@@ -577,8 +577,12 @@
   // 更新时间
   function updateTime() {
     var now = new Date();
-    var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-    var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+    now.setUTCHours(now.getUTCHours() + 8);
+    var hours = now.getUTCHours().toString().padStart(2, '0');
+    var minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    var seconds = now.getUTCSeconds().toString().padStart(2, '0');
+    var time = hours + ":" + minutes + ":" + seconds;
+    var date = now.getUTCFullYear() + "-" + (now.getUTCMonth() + 1).toString().padStart(2, '0') + "-" + now.getUTCDate().toString().padStart(2, '0');
     document.getElementById('time').textContent = time + ' UTC+8';
     document.getElementById('date').textContent = date;
   }

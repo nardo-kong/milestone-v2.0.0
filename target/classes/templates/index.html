@@ -197,10 +197,12 @@
       <!-- 侧栏时间天气-->
       <div class="menu is-menu-main">
         <p class="menu-label">Time and Weather</p>
-        <div id="time-date-weather">
-          <p id="time"></p>
-          <p id="date"></p>
-          <p id="weather"></p>
+        <div id="time-date-weather" style="padding-left: 20px;">
+          <p id="time" style="font-weight: bold; font-size: 20px; color: white;"></p>
+          <p id="date" style="font-weight: bold; font-size: 20px; color: white;"></p>
+          <p id="weather" style="font-weight: bold; font-size: 20px; color: white;"></p>
+          <p style="font-weight: bold; font-size: 20px; color: white;">Hong Kong</p>
+          <p style="font-weight: bold; font-size: 20px; color: rgb(175, 170, 170);">Data from OpenWeatherMap</p>
         </div>
       </div>
       
@@ -573,9 +575,9 @@
       .then(response => response.json())
       .then(data => {
         var weather = data.weather[0].description;
-        console.log("data: ", data);
-        console.log("weather: ", weather);
-        document.getElementById('weather').textContent = "Weather: " + weather;
+        console.log(data);
+        console.log(weather);
+        document.getElementById('weather').textContent = weather;
       });
   }
   

@@ -12,6 +12,21 @@
   <!-- Fonts -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+  <style>
+    #time-date-weather {
+      padding-left: 20px;
+    }
+  
+    #time-date-weather p {
+      font-size: 16px;
+      color: white;
+    }
+  
+    #time-date-weather p:last-child {
+      color: rgb(175, 170, 170);
+    }
+  </style>
   
   
 </head>
@@ -197,12 +212,12 @@
       <!-- 侧栏时间天气-->
       <div class="menu is-menu-main">
         <p class="menu-label">Time and Weather</p>
-        <div id="time-date-weather" style="padding-left: 20px;">
-          <p id="time" style="font-weight: bold; font-size: 20px; color: white;"></p>
-          <p id="date" style="font-weight: bold; font-size: 20px; color: white;"></p>
-          <p id="weather" style="font-weight: bold; font-size: 20px; color: white;"></p>
-          <p style="font-weight: bold; font-size: 20px; color: white;">Hong Kong</p>
-          <p style="font-weight: bold; font-size: 20px; color: rgb(175, 170, 170);">Data from OpenWeatherMap</p>
+        <div id="time-date-weather">
+          <p id="time"></p>
+          <p id="date"></p>
+          <p id="weather"></p>
+          <p>Hong Kong</p>
+          <p>Data from OpenWeatherMap</p>
         </div>
       </div>
       

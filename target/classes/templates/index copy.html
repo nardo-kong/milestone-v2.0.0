@@ -379,7 +379,36 @@
     </div>
 
     <!-- 图栏 graph area -->
-    
+    <div class="card">
+
+      <!-- 图栏标题 graph area title -->
+      <header class="card-header">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-finance"></i></span>
+          Performance
+        </p>
+        <a href="#" class="card-header-icon">
+          <span class="icon"><i class="mdi mdi-reload"></i></span>
+        </a>
+      </header>
+
+      <!-- 图栏内容 graph area content -->
+      <div class="card-content">
+        <div class="chart-area">
+          <div style="height: 100%;">
+            <div class="chartjs-size-monitor">
+              <div class="chartjs-size-monitor-expand">
+                <div></div>
+              </div>
+              <div class="chartjs-size-monitor-shrink">
+                <div></div>
+              </div>
+            </div>
+            <canvas id="big-line-chart" width="2992" height="1000" class="chartjs-render-monitor" style="display: block; height: 400px; width: 1197px;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 表格栏 table area -->
     <div class="card has-table has-mobile-sort-spaced">
@@ -421,12 +450,9 @@
                 <!-- 使用 th:each 从数据库动态生成行 -->
                 <div th:each="flight, stat : ${flights}">
                   <tr>
-                    <td class="is-actions-cell">
-                      <div class="buttons is-right" th:if="${flight.processPercent < 1}">
-                        <button class="button is-small" 
-                            th:classappend="${flight.processPercent < 0.5} ? 'is-danger' : 'is-warning'">
-                          <span class="icon"><i class="mdi mdi-exclamation-thick"></i></span>
-                        </button>
+                    <td class="is-image-cell">
+                      <div class="image">
+                        <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="is-rounded">
                       </div>
                     </td>
 
@@ -462,46 +488,18 @@
                           <tr>
                             <td th:text="awbIntimeRate"></td> <!-- 步骤的名称 -->
                             <td th:text="${flight.awbIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
                           </tr>
                           <tr>
                             <td th:text="uldIntimeRate"></td> <!-- 步骤的名称 -->
                             <td th:text="${flight.uldIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
                           </tr>
                           <tr>
                             <td th:text="handoverIntimeRate"></td> <!-- 步骤的名称 -->
                             <td th:text="${flight.handoverIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
                           </tr>
                           <tr>
                             <td th:text="loadsheetIntimeRate"></td> <!-- 步骤的名称 -->
                             <td th:text="${flight.loadsheetIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
                           </tr>
                         </tbody>
                       </table>

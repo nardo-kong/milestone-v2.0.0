@@ -29,6 +29,7 @@
 
     .procedure-detail {
       border-collapse: collapse;
+      margin: 0 40px;
     }
     
     .procedure-detail th, .procedure-detail td {
@@ -57,7 +58,6 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      margin-bottom: 20px;
       position: relative;
       flex-direction: row;
       padding: 0 25px;
@@ -69,7 +69,7 @@
       top: 50%;
       left: 25px;  /* Indent the left end of the line by 20px */
       right: 25px;  /* Indent the right end of the line by 20px */
-      border-top: 2px solid #000;
+      border-top: 4px solid #bebebe;
       z-index: 1;
     }
     
@@ -100,6 +100,22 @@
       text-overflow: ellipsis;
       margin: 0;  /* Remove the default margin */
       padding: 0;  /* Remove the default padding */
+    }
+
+    .step.is-primary {
+      background-color: #00d1b2; /* This is the primary color in Bulma */
+    }
+    
+    .step.is-warning {
+      background-color: #ffdd57; /* This is the warning color in Bulma */
+    }
+    
+    .step.is-danger {
+      background-color: #ff3860; /* This is the danger color in Bulma */
+    }
+
+    .step.is-none {
+      background-color: #2e2e2e; /* This is the default color */
     }
   </style>
   
@@ -172,7 +188,7 @@
           <!-- 账号栏本体 account bar -->
           <a class="navbar-link is-arrowless">
             <div class="is-user-avatar">
-              <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="John Doe">
+              <img src="https://th.bing.com/th/id/OIP.hXx0AYVJ-q8bJtwzN10k9wHaHa?rs=1&pid=ImgDetMain" alt="Nardo">
             </div>
 
             <!-- 账号栏用户名 account bar user name -->
@@ -290,7 +306,7 @@
         <div id="time-date-weather">
           <p id="time"></p>
           <p id="date"></p>
-          <p id="weather"></p>
+          <p id="weather"><span id="weather-text" style="margin-right: 8px;"></span><i id="weather-icon"></i></p>
           <p>Hong Kong</p>
           <p>Data from <a href="https://openweathermap.org/" style="text-decoration: underline; color: inherit;">OpenWeatherMap</a></p>
         </div>
@@ -306,7 +322,7 @@
       <div class="level-left">
         <div class="level-item">
           <ul>
-            <li>Nardo</li>
+            <li>Milestone</li>
             <li>Dashboard</li>
           </ul>
         </div>
@@ -341,17 +357,16 @@
               <div class="level-item">
 
                 <!-- 指标1内容 metrics1 content -->
-                <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Today Cargo
-                </h3>
-                  <h1 class="title">
-                    512
+                <div class="is-widget-label">
+                  <h3 class="subtitle is-spaced">
+                  </h3>
+                  <h1 class="title" th:text="${displayNum.isEmpty() ? '' : displayNum[0].totalFlt}">
                   </h1>
                 </div>
               </div>
               <div class="level-item has-widget-icon">
                 <div class="is-widget-icon"><span class="icon has-text-primary is-large"><i
-                    class="mdi mdi-cart-outline mdi-48px"></i></span>
+                    class="mdi mdi-airplane mdi-48px"></i></span>
                 </div>
               </div>
             </div>
@@ -368,16 +383,16 @@
 
                 <!-- 指标2内容 metrics2 content -->
                 <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Work Load
+                  Flights on process
                 </h3>
                   <h1 class="title">
-                    90%
+                    10
                   </h1>
                 </div>
               </div>
               <div class="level-item has-widget-icon">
                 <div class="is-widget-icon"><span class="icon has-text-info is-large"><i
-                    class="mdi mdi-account-multiple mdi-48px"></i></span>
+                    class="mdi mdi-progress-clock mdi-48px"></i></span>
                 </div>
               </div>
             </div>
@@ -385,33 +400,8 @@
         </div>
       </div>
 
-      <!-- 指标3 metrics3-->
-      <div class="tile is-parent">
-        <div class="card tile is-child">
-          <div class="card-content">
-            <div class="level is-mobile">
-              <div class="level-item">
-
-                <!-- 指标3内容 metrics3 content -->
-                <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Ontime rate
-                </h3>
-                  <h1 class="title">
-                    98%
-                  </h1>
-                </div>
-              </div>
-              <div class="level-item has-widget-icon">
-                <div class="is-widget-icon"><span class="icon has-text-success is-large"><i
-                    class="mdi mdi-finance mdi-48px"></i></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       
-      <!-- 指标4 metrics4-->
+      <!-- 指标3 metrics4-->
       <div class="tile is-parent">
         <div class="card tile is-child">
           <div class="card-content">
@@ -420,16 +410,16 @@
 
                 <!-- 指标4内容 metrics4 content -->
                 <div class="is-widget-label"><h3 class="subtitle is-spaced">
-                  Delay AWBs
+                  Delaying / Delayed
                 </h3>
-                  <h1 class="title" style="color: red;">
-                    1
+                  <h1 class="title" style="color: rgb(243, 207, 0);">
+                    0 / 1
                   </h1>
                 </div>
               </div>
               <div class="level-item has-widget-icon">
-                <div class="is-widget-icon"><span class="icon has-text-danger is-large"><i
-                    class="mdi mdi-alert mdi-48px"></i></span>
+                <div class="is-widget-icon"><span class="icon has-text-warning is-large"><i
+                    class="mdi mdi-alert-box mdi-48px"></i></span>
                 </div>
               </div>
             </div>
@@ -466,12 +456,13 @@
               <thead>
               <tr>
                 <th style="width: 5%;"></th>
-                <th style="width: 13%;">FLT_NUM</th>
-                <th style="width: 13%;">LEG_ARR</th>
-                <th style="width: 17%;">SCH_DEP_TIME</th>
-                <th style="width: 25%;">Progress</th>
-                <th style="width: 17%;">ACT_DEP_TIME</th>
-                <th style="width: 10%;"></th>
+                <th style="width: 11%;">FLT_NUM</th>
+                <th style="width: 11%;">LEG_ARR</th>
+                <th style="width: 16%;">SCH_DEP_TIME</th>
+                <th style="width: 22%;">Progress</th>
+                <th style="width: 15%;">Process</th>
+                <th style="width: 16%;">ACT_DEP_TIME</th>
+                <th style="width: 5%;"></th>
               </tr>
               </thead>
 
@@ -483,10 +474,9 @@
                 <div th:each="flight, stat : ${flights}">
                   <tr>
                     <td class="is-actions-cell">
-                      <div class="buttons is-right" th:if="${flight.processPercent < 1}">
+                      <div class="buttons is-right" th:if="${flight.flightStatus != 'normal'}">
                         <button class="button is-small" 
-                          th:classappend="${flight.flightStatus == 'normal' ? 'is-primary' : 
-                                   flight.flightStatus.startsWith('delayed') ? 'is-warning' : 
+                          th:classappend="${flight.flightStatus.startsWith('delayed') ? 'is-warning' : 
                                    flight.flightStatus.startsWith('delaying') ? 'is-danger' : ''}">
                           <span class="icon"><i class="mdi mdi-exclamation-thick"></i></span>
                         </button>
@@ -502,6 +492,7 @@
                         <span th:text="${#numbers.formatDecimal(flight.processPercent*100, 0, 0)} + '%'"></span>
                       </div>
                     </td>
+                    <td data-label="Process" th:text="${flight.process}"></td>
                     <td data-label="ACT_DEP_TIME" th:text="${flight.actDepTime}"></td>
                     <td class="is-actions-cell">
                       <div class="buttons is-right">
@@ -513,28 +504,62 @@
                     
                   </tr>
                   <tr th:id="'dropdown-table' + ${stat.index}" style="display: none;">
-                    <td colspan="7">
+                    <td colspan="8" >
+
+                      <!-- 步骤时间轴 -->
                       <div class="timeline-container">
                         <div class="timeline">
-                            <div class="step" th:each="step : ${mainsteps}"></div>
+                          <div class="step" th:each="step : ${mainstepsdata}" 
+                            th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                    (flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                    (flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : 'is-none'))}">
+                          </div>
                         </div>
                         <div class="step-names">
-                            <p class="step-name" th:each="step : ${mainsteps}" th:text="${step}"></p>
+                          <div th:each="step, iterStat : ${mainstepsdata}">
+                            <p class="step-name" 
+                               th:text="${#strings.length(flight[step + 'Threshold'].toString()) >= 16 ? 
+                                   #strings.substring(flight[step + 'Threshold'].toString(), 11, 16) : 
+                                   flight[step + 'Threshold'].toString()}">
+                            </p>
+                            <p class="step-name" th:text="${mainstepstext[iterStat.index]}"></p>
+                          </div>
                         </div>
                       </div>
 
 
+                      <!-- 步骤详情 -->
                       <table class="procedure-detail">
                         <thead>
                           <tr>
                             <th>Step</th>
                             <th>Status</th>
+                            <th>Threshold</th>
+                            <th>Contact</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <!-- except notoc and loadend -->
                           <tr th:each="step : ${detailsteps}">
                             <td th:text="${step}"></td> <!-- 步骤的名称 -->
                             <td th:text="${flight[step + 'NowNum']} + '/' + ${flight[step + 'TotalNum']}"></td> <!-- 步骤的完成情况 -->
+                            <td th:text="${flight[step + 'Threshold']}"></td> <!-- 步骤的阈值 -->
+                            <td class="is-actions-cell">
+                              <div class="buttons is-right">
+                                <button th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                             flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                             flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : ''}" 
+                                    class="button is-small" type="button">
+                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- notoc and loadend -->
+                          <tr th:each="step : ${specialdetailsteps}">
+                            <td th:text="${step}"></td> <!-- 步骤的名称 -->
+                            <td th:text="${flight[step + 'Status']}"></td> <!-- 步骤的完成情况 -->
+                            <td th:text="${flight[step + 'Threshold']}"></td> <!-- 步骤的阈值 -->
                             <td class="is-actions-cell">
                               <div class="buttons is-right">
                                 <button th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
@@ -656,13 +681,41 @@
   
   // 更新天气
   function updateWeather() {
+    // 映射天气图标
+    var weatherIcons = {
+      'Thunderstorm': 'mdi-weather-lightning',
+      'Drizzle': 'mdi-weather-rainy',
+      'Rain': 'mdi-weather-pouring',
+      'Snow': 'mdi-weather-snowy',
+      'Mist': 'mdi-weather-fog',
+      'Smoke': 'mdi-weather-fog',
+      'Haze': 'mdi-weather-fog',
+      'Dust': 'mdi-weather-fog',
+      'Fog': 'mdi-weather-fog',
+      'Sand': 'mdi-weather-fog',
+      'Ash': 'mdi-weather-fog',
+      'Squall': 'mdi-weather-windy',
+      'Tornado': 'mdi-weather-tornado',
+      'Clear': 'mdi-weather-sunny',
+      'Clouds': 'mdi-weather-cloudy',
+    };
+
     // 获取天气信息
     fetch('http://api.openweathermap.org/data/2.5/weather?q=Hong%20Kong&appid=a44b91fec352869067b6cc26a0169d81')
       .then(response => response.json())
       .then(data => {
         var weather = data.weather[0].description;
         weather = weather.charAt(0).toUpperCase() + weather.slice(1);
-        document.getElementById('weather').textContent = weather;
+        document.getElementById('weather-text').textContent = weather;
+
+        var mainweather = data.weather[0].main;
+        var Icon = weatherIcons[mainweather];
+
+        if (Icon) {
+          var iconElement = document.getElementById('weather-icon');
+          iconElement.className = '';
+          iconElement.classList.add('mdi', `${Icon}`); // 添加新的图标类名
+        }
       });
   }
   
@@ -674,6 +727,16 @@
   
   // 页面加载时立即更新一次天气
   updateWeather();
+
+  // 为航班号添加前缀
+  var fltNumElements = document.querySelectorAll('[data-label="FLT_NUM"]');
+  fltNumElements.forEach(function(element) {
+    var fltNum = element.textContent;
+    fltNum = fltNum.padStart(3, '0');
+    element.textContent = "CX" + fltNum;
+  });
+
+
 </script>
 
 </body>

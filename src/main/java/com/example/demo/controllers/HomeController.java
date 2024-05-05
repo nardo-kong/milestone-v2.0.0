@@ -1,8 +1,7 @@
 package com.example.demo.controllers;
-import com.example.demo.Entities.FinalTable;
-import com.example.demo.Entities.Flight;
-import com.example.demo.Entities.Step;
+import com.example.demo.Entities.*;
 import com.example.demo.Repositories.FinalTableRepository;
+import com.example.demo.Repositories.DisplayNumRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,9 @@ public class HomeController {
 
     @Autowired
     private FinalTableRepository finalTableRepository;
+
+    @Autowired
+    private DisplayNumRepository displayNumRepository;
 
     // Create some dummy data
     /*
@@ -46,8 +48,10 @@ public class HomeController {
             new Flight("FLT3", "LEG3", "12:00", 100, "12:05", steps3)
         );
     */
-    List<String> mainsteps = Arrays.asList("Cargo Acceptance", "AWB Acceptance", "Build Up", "Towing", "Loading", "Airborne");
+    List<String> mainstepstext = Arrays.asList("Cargo Acceptance", "AWB Acceptance", "Build Up", "Towing", "Loading", "Airborne");
+    List<String> mainstepsdata = Arrays.asList("acceptance", "awb", "uld", "handover", "loadend", "departure");
     List<String> detailsteps = Arrays.asList("acceptance", "awb", "uld", "handover");
+    List<String> specialdetailsteps = Arrays.asList("notoc", "loadend");
 
     @GetMapping("/")
     public ModelAndView getFlights() {
@@ -55,8 +59,12 @@ public class HomeController {
         modelAndView.setViewName("index");
         List<FinalTable> flights = finalTableRepository.findAll();
         modelAndView.addObject("flights", flights);
-        modelAndView.addObject("mainsteps", mainsteps);
+        modelAndView.addObject("mainstepstext", mainstepstext);
+        modelAndView.addObject("mainstepsdata", mainstepsdata);
         modelAndView.addObject("detailsteps", detailsteps);
+        modelAndView.addObject("specialdetailsteps", specialdetailsteps);
+        List<DisplayNum> displayNums = displayNumRepository.findAll();
+        modelAndView.addObject("displayNum", displayNums);
 
         return modelAndView;
     }

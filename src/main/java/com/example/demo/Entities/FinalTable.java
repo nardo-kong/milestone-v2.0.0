@@ -2,7 +2,7 @@ package com.example.demo.Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "finaltable_withthreshold")
+@Table(name = "finaltable_finished")
 public class FinalTable {
 
     @Id
@@ -102,8 +102,8 @@ public class FinalTable {
     @Column(name = "NOTOC_status")
     private String notocStatus;
 
-    @Column(name = "landingend_status")
-    private String landingEndStatus;
+    @Column(name = "loadingend_status")
+    private String loadendStatus;
 
     @Column(name = "LEG_DEP")
     private String legDep;
@@ -120,7 +120,25 @@ public class FinalTable {
     @Column(name = "ACT_DEP_TIME")
     private String actDepTime;
 
+    private String acceptanceThreshold;
+
+    private String awbThreshold;
+
+    private String uldThreshold;
+
+    private String handoverThreshold;
+
+    @Column(name = "NOTOC_threshold")
+    private String notocThreshold;
+
+    @Column(name = "LoadEND_threshold")
+    private String loadendThreshold;
+
     private String flightStatus;
+
+    private String departureStatus;
+
+    private String departureThreshold;
 
 // 目前到哪一步了
     @Column(name = "process")
@@ -252,8 +270,8 @@ public class FinalTable {
         return notocStatus;
     }
 
-    public String getLandingEndStatus() {
-        return landingEndStatus;
+    public String getLoadendStatus() {
+        return loadendStatus;
     }
 
     public String getLegDep() {
@@ -286,5 +304,41 @@ public class FinalTable {
 
     public String getFlightStatus() {
         return flightStatus;
+    }
+
+    public String getAcceptanceThreshold() {
+        return acceptanceThreshold;
+    }
+
+    public String getAwbThreshold() {
+        return awbThreshold;
+    }
+
+    public String getUldThreshold() {
+        return uldThreshold;
+    }
+
+    public String getHandoverThreshold() {
+        return handoverThreshold;
+    }
+
+    public String getNotocThreshold() {
+        return notocThreshold;
+    }
+
+    public String getLoadendThreshold() {
+        return loadendThreshold;
+    }
+
+    public String getDepartureStatus() {
+        if (process.equals("completed")) {
+            return "normal";
+        } else {
+            return "none";
+        }
+    }
+
+    public String getDepartureThreshold() {
+        return schDepTime;
     }
 }

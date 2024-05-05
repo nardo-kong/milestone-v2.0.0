@@ -46,7 +46,8 @@ public class HomeController {
             new Flight("FLT3", "LEG3", "12:00", 100, "12:05", steps3)
         );
     */
-    
+    List<String> mainsteps = Arrays.asList("Cargo Acceptance", "AWB Acceptance", "Build Up", "Towing", "Loading", "Airborne");
+    List<String> detailsteps = Arrays.asList("acceptance", "awb", "uld", "handover");
 
     @GetMapping("/")
     public ModelAndView getFlights() {
@@ -54,6 +55,8 @@ public class HomeController {
         modelAndView.setViewName("index");
         List<FinalTable> flights = finalTableRepository.findAll();
         modelAndView.addObject("flights", flights);
+        modelAndView.addObject("mainsteps", mainsteps);
+        modelAndView.addObject("detailsteps", detailsteps);
 
         return modelAndView;
     }

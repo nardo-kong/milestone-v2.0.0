@@ -40,6 +40,67 @@
     .procedure-detail tbody tr:last-child td {
       border-bottom: 2px solid rgb(223, 223, 223);
     }
+
+
+
+    /* Timeline */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+    
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+      position: relative;
+      flex-direction: row;
+      padding: 0 25px;
+    }
+    
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 25px;  /* Indent the left end of the line by 20px */
+      right: 25px;  /* Indent the right end of the line by 20px */
+      border-top: 2px solid #000;
+      z-index: 1;
+    }
+    
+    .step-names {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .timeline .step {
+      width: 50px;
+      height: 50px;
+      background: #000;
+      border-radius: 50%;
+      z-index: 2;
+      position: relative;
+      margin: 0;  /* Remove the default margin */
+      padding: 0;  /* Remove the default padding */
+    }
+
+    .step-names .step-name {
+      text-align: center;
+      width: 100px;
+      white-space: normal;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;  /* Remove the default margin */
+      padding: 0;  /* Remove the default padding */
+    }
   </style>
   
   
@@ -424,7 +485,9 @@
                     <td class="is-actions-cell">
                       <div class="buttons is-right" th:if="${flight.processPercent < 1}">
                         <button class="button is-small" 
-                            th:classappend="${flight.processPercent < 0.5} ? 'is-danger' : 'is-warning'">
+                          th:classappend="${flight.flightStatus == 'normal' ? 'is-primary' : 
+                                   flight.flightStatus.startsWith('delayed') ? 'is-warning' : 
+                                   flight.flightStatus.startsWith('delaying') ? 'is-danger' : ''}">
                           <span class="icon"><i class="mdi mdi-exclamation-thick"></i></span>
                         </button>
                       </div>
@@ -436,7 +499,7 @@
                     <td data-label="Progress" class="is-progress-cell">
                       <div style="display: flex; align-items: center; vertical-align: middle;">
                         <progress max="100" class="progress is-small is-primary" th:value="${flight.processPercent}*100" style="margin-right: 20px;"></progress>
-                        <span th:text="${flight.processPercent}*100 + '%'"></span>
+                        <span th:text="${#numbers.formatDecimal(flight.processPercent*100, 0, 0)} + '%'"></span>
                       </div>
                     </td>
                     <td data-label="ACT_DEP_TIME" th:text="${flight.actDepTime}"></td>
@@ -451,53 +514,33 @@
                   </tr>
                   <tr th:id="'dropdown-table' + ${stat.index}" style="display: none;">
                     <td colspan="7">
+                      <div class="timeline-container">
+                        <div class="timeline">
+                            <div class="step" th:each="step : ${mainsteps}"></div>
+                        </div>
+                        <div class="step-names">
+                            <p class="step-name" th:each="step : ${mainsteps}" th:text="${step}"></p>
+                        </div>
+                      </div>
+
+
                       <table class="procedure-detail">
                         <thead>
                           <tr>
                             <th>Step</th>
-                            <th>Rate</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td th:text="awbIntimeRate"></td> <!-- 步骤的名称 -->
-                            <td th:text="${flight.awbIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
+                          <tr th:each="step : ${detailsteps}">
+                            <td th:text="${step}"></td> <!-- 步骤的名称 -->
+                            <td th:text="${flight[step + 'NowNum']} + '/' + ${flight[step + 'TotalNum']}"></td> <!-- 步骤的完成情况 -->
                             <td class="is-actions-cell">
                               <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td th:text="uldIntimeRate"></td> <!-- 步骤的名称 -->
-                            <td th:text="${flight.uldIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td th:text="handoverIntimeRate"></td> <!-- 步骤的名称 -->
-                            <td th:text="${flight.handoverIntime100Rate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
-                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td th:text="loadsheetIntimeRate"></td> <!-- 步骤的名称 -->
-                            <td th:text="${flight.loadsheetIntimeRate}*100"></td> <!-- 步骤的完成情况 -->
-                            <td class="is-actions-cell">
-                              <div class="buttons is-right">
-                                <button class="button is-small is-primary" type="button">
+                                <button th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                             flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                             flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : ''}" 
+                                    class="button is-small" type="button">
                                   <span class="icon"><i class="mdi mdi-phone"></i></span>
                                 </button>
                               </div>

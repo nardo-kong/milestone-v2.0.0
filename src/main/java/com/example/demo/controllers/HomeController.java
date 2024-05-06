@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 import com.example.demo.Entities.*;
-import com.example.demo.Repositories.FinalTableRepository;
-import com.example.demo.Repositories.DisplayRepository;
+import com.example.demo.Repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,9 @@ public class HomeController {
 
     @Autowired
     private FinalTableRepository finalTableRepository;
+
+    @Autowired
+    private FinalTableUnRepository finalTableUnRepository;
 
     @Autowired
     private DisplayRepository displayRepository;
@@ -58,7 +60,9 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         List<FinalTable> flights = finalTableRepository.findAll();
+        List<FinalTableUn> flightsUn = finalTableUnRepository.findAll();
         modelAndView.addObject("flights", flights);
+        modelAndView.addObject("flightsUn", flightsUn);
         modelAndView.addObject("mainstepstext", mainstepstext);
         modelAndView.addObject("mainstepsdata", mainstepsdata);
         modelAndView.addObject("detailsteps", detailsteps);

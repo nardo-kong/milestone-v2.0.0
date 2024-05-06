@@ -428,6 +428,113 @@
 
               <!-- 表格内容 table content -->
               <tbody>
+
+                <!-- 使用 th:each 从Un数据库动态生成行 -->
+                <div th:each="flight, stat : ${flightsUn}">
+                  <tr>
+                    <td class="is-actions-cell">
+                      <div class="buttons is-right" th:if="${flight.flightStatus != 'normal'}">
+                        <button class="button is-small" 
+                          th:classappend="${flight.flightStatus.startsWith('delayed') ? 'is-warning' : 
+                                   flight.flightStatus.startsWith('delaying') ? 'is-danger' : ''}">
+                          <span class="icon"><i class="mdi mdi-exclamation-thick"></i></span>
+                        </button>
+                      </div>
+                    </td>
+
+                    <td data-label="FLT_NUM" th:text="${flight.fltNum}"></td>
+                    <td data-label="LEG_ARR" th:text="${flight.legArr}"></td>
+                    <td data-label="SCH_DEP_TIME" th:text="${flight.schDepTime}"></td>
+                    <td data-label="Progress" class="is-progress-cell">
+                      <div style="display: flex; align-items: center; vertical-align: middle;">
+                        <progress max="100" class="progress is-small is-primary" th:value="${flight.processPercent}*100" style="margin-right: 20px;"></progress>
+                        <span th:text="${#numbers.formatDecimal(flight.processPercent*100, 0, 0)} + '%'"></span>
+                      </div>
+                    </td>
+                    <td data-label="Process" th:text="${flight.process}"></td>
+                    <td data-label="ACT_DEP_TIME" th:text="${flight.actDepTime}"></td>
+                    <td class="is-actions-cell">
+                      <div class="buttons is-right">
+                        <button class="button is-small is-primary" type="button" th:id="'eye' + ${stat.index}">
+                          <span class="icon"><i class="mdi mdi-eye"></i></span>
+                        </button>
+                      </div>
+                    </td>
+                    
+                  </tr>
+                  <tr th:id="'dropdown-table' + ${stat.index}" style="display: none;">
+                    <td colspan="8" >
+
+                      <!-- 步骤时间轴 -->
+                      <div class="timeline-container">
+                        <div class="timeline">
+                          <div class="step" th:each="step : ${mainstepsdata}" 
+                            th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                    (flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                    (flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : 'is-none'))}">
+                          </div>
+                        </div>
+                        <div class="step-names">
+                          <div th:each="step, iterStat : ${mainstepsdata}">
+                            <p class="step-name" 
+                               th:text="${#strings.length(flight[step + 'Threshold'].toString()) >= 16 ? 
+                                   #strings.substring(flight[step + 'Threshold'].toString(), 11, 16) : 
+                                   flight[step + 'Threshold'].toString()}">
+                            </p>
+                            <p class="step-name" th:text="${mainstepstext[iterStat.index]}"></p>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!-- 步骤详情 -->
+                      <table class="procedure-detail">
+                        <thead>
+                          <tr>
+                            <th>Step</th>
+                            <th>Status</th>
+                            <th>Threshold</th>
+                            <th>Contact</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- except notoc and loadend -->
+                          <tr th:each="step : ${detailsteps}">
+                            <td th:text="${step}"></td> <!-- 步骤的名称 -->
+                            <td th:text="${flight[step + 'NowNum']} + '/' + ${flight[step + 'TotalNum']}"></td> <!-- 步骤的完成情况 -->
+                            <td th:text="${flight[step + 'Threshold']}"></td> <!-- 步骤的阈值 -->
+                            <td class="is-actions-cell">
+                              <div class="buttons is-right">
+                                <button th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                             flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                             flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : ''}" 
+                                    class="button is-small" type="button">
+                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- notoc and loadend -->
+                          <tr th:each="step : ${specialdetailsteps}">
+                            <td th:text="${step}"></td> <!-- 步骤的名称 -->
+                            <td th:text="${flight[step + 'Status']}"></td> <!-- 步骤的完成情况 -->
+                            <td th:text="${flight[step + 'Threshold']}"></td> <!-- 步骤的阈值 -->
+                            <td class="is-actions-cell">
+                              <div class="buttons is-right">
+                                <button th:classappend="${flight[step + 'Status'] == 'normal' ? 'is-primary' : 
+                                             flight[step + 'Status'].startsWith('delayed') ? 'is-warning' : 
+                                             flight[step + 'Status'].startsWith('delaying') ? 'is-danger' : ''}" 
+                                    class="button is-small" type="button">
+                                  <span class="icon"><i class="mdi mdi-phone"></i></span>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </div>
                 <!-- 使用 th:each 从数据库动态生成行 -->
                 <div th:each="flight, stat : ${flights}">
                   <tr>

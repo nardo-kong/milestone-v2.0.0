@@ -111,7 +111,7 @@ public class FinalTable {
     @Column(name = "LEG_ARR")
     private String legArr;
 
-    @Column(name = "SCH_DEP_TIME")
+    @Column(name = "DEP_TIME")
     private String schDepTime;
 
     @Column(name = "EST_DEP_TIME")
@@ -139,6 +139,37 @@ public class FinalTable {
     private String departureStatus;
 
     private String departureThreshold;
+
+    private Integer uld70TotalNum;
+
+    private Integer uld70NowNum;
+
+    private Integer handover50TotalNum;
+
+    private Integer handover50NowNum;
+
+    @Column(name = "uld70_threshold")
+    private String uld70Threshold;
+
+    @Column(name = "handover50_threshold")
+    private String handover50Threshold;
+
+    @Column(name = "uld70_status")
+    private String uld70Status;
+
+    @Column(name = "handover50_status")
+    private String handover50Status;
+
+    private String manpowerThreshold;
+
+    private String manpowerStatus;
+
+
+    @Column(name = "handover_tow_threshold")
+    private String TOWThreshold;
+
+    @Column(name = "TOW_status")
+    private String TOWStatus;
 
 // 目前到哪一步了
     @Column(name = "process")
@@ -340,5 +371,53 @@ public class FinalTable {
 
     public String getDepartureThreshold() {
         return schDepTime;
+    }
+
+    public Integer getUld70TotalNum() {
+        return (int) (uldTotalNum*0.7);
+    }
+
+    public Integer getUld70NowNum() {
+        return (int) (uldTotalNum*0.7);
+    }
+
+    public Integer getHandover50TotalNum() {
+        return (int) (handoverTotalNum*0.5);
+    }
+
+    public Integer getHandover50NowNum() {
+        return (int) (handoverTotalNum*0.5);
+    }
+
+    public String getUld70Threshold() {
+        return uld70Threshold;
+    }
+
+    public String getHandover50Threshold() {
+        return handover50Threshold;
+    }
+
+    public String getUld70Status() {
+        return uld70Status;
+    }
+
+    public String getHandover50Status() {
+        return handover50Status;
+    }
+
+    public String getManpowerThreshold() {
+        return manpowerThreshold;
+    }
+
+    public String getManpowerStatus() {
+        return manpowerStatus;
+    }
+
+    public String getTOWStatus() {
+        return TOWStatus;
+    }
+
+    public String getTOWThreshold() {
+        return TOWThreshold;
     }
 }

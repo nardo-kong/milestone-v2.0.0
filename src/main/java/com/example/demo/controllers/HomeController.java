@@ -52,8 +52,11 @@ public class HomeController {
     */
     List<String> mainstepstext = Arrays.asList("Cargo Acceptance", "AWB Acceptance", "Build Up", "Towing", "Loading", "Airborne");
     List<String> mainstepsdata = Arrays.asList("acceptance", "awb", "uld", "handover", "loadend", "departure");
-    List<String> detailsteps = Arrays.asList("acceptance", "awb", "uld", "handover");
+    List<String> detailsteps = Arrays.asList("acceptance", "awb", "uld70", "TOW", "handover50", "uld", "manpower", "handover", "notoc", "loadend");
     List<String> specialdetailsteps = Arrays.asList("notoc", "loadend");
+    List<String> formalNames = Arrays.asList("Cargo Acceptance", "AWB Acceptance", "Build Up(70%)", "First 7 Positions towed", "Towing (50%)", "Build Up Completed", "Manpower", "Last CCT Handover", "NOTOC Dellivered to Captain", "Loading Completed");
+    List<String> exceptions = Arrays.asList("TOW", "manpower", "notoc", "loadend");
+    
 
     @GetMapping("/")
     public ModelAndView getFlights() {
@@ -69,6 +72,10 @@ public class HomeController {
         modelAndView.addObject("specialdetailsteps", specialdetailsteps);
         List<Display> displayNums = displayRepository.findAll();
         modelAndView.addObject("displayNum", displayNums);
+        modelAndView.addObject("formalNames", formalNames);
+        int offset = flightsUn.size();
+        modelAndView.addObject("offset", offset);
+        modelAndView.addObject("exceptions", exceptions);
 
         return modelAndView;
     }

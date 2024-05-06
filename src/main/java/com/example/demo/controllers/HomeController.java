@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 import com.example.demo.Entities.*;
 import com.example.demo.Repositories.FinalTableRepository;
-import com.example.demo.Repositories.DisplayNumRepository;
+import com.example.demo.Repositories.DisplayRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class HomeController {
     private FinalTableRepository finalTableRepository;
 
     @Autowired
-    private DisplayNumRepository displayNumRepository;
+    private DisplayRepository displayRepository;
 
     // Create some dummy data
     /*
@@ -63,7 +63,7 @@ public class HomeController {
         modelAndView.addObject("mainstepsdata", mainstepsdata);
         modelAndView.addObject("detailsteps", detailsteps);
         modelAndView.addObject("specialdetailsteps", specialdetailsteps);
-        List<DisplayNum> displayNums = displayNumRepository.findAll();
+        List<Display> displayNums = displayRepository.findAll();
         modelAndView.addObject("displayNum", displayNums);
 
         return modelAndView;

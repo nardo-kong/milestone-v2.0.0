@@ -764,7 +764,7 @@
     };
 
     // 获取天气信息
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=Hong%20Kong&appid=a44b91fec352869067b6cc26a0169d81')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=Hong%20Kong&appid=a44b91fec352869067b6cc26a0169d81')
       .then(response => response.json())
       .then(data => {
         var weather = data.weather[0].description;
